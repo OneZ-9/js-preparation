@@ -32,29 +32,75 @@ document.querySelectorAll("button")[1].click();
 console.log(document.body.innerHTML);
 */
 
+/*
 function initialize() {
   const buttons = document.querySelectorAll("button");
+  //   console.log(buttons);
 
   buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
+      // Select parent element that event happens
+      // Then select the span element inside that div
       const taskDiv = event.target.parentElement;
       const taskSpan = taskDiv.querySelector("span");
 
       if (button.classList.contains("upButton")) {
         const previousTaskDiv = taskDiv.previousElementSibling;
-        if (previousTaskDiv) {
-          const previousTaskSpan = previousTaskDiv.querySelector("span");
-          // Swap the text content of the current and previous task spans
-          [taskSpan.textContent, previousTaskSpan.textContent] = [
-            previousTaskSpan.textContent,
-            taskSpan.textContent,
-          ];
-        }
+        console.log(previousTaskDiv);
+        // if (previousTaskDiv) {
+        //   const previousTaskSpan = previousTaskDiv.querySelector("span");
+        //   // Swap the text content of the current and previous task spans
+        //   [taskSpan.textContent, previousTaskSpan.textContent] = [
+        //     previousTaskSpan.textContent,
+        //     taskSpan.textContent,
+        //   ];
+        // }
       } else if (button.classList.contains("downButton")) {
         const nextTaskDiv = taskDiv.nextElementSibling;
         if (nextTaskDiv) {
           const nextTaskSpan = nextTaskDiv.querySelector("span");
           // Swap the text content of the current and next task spans
+          [taskSpan.textContent, nextTaskSpan.textContent] = [
+            nextTaskSpan.textContent,
+            taskSpan.textContent,
+          ];
+        }
+      }
+    });
+  });
+}
+  */
+
+function initialize() {
+  // select all button elements
+  const buttons = document.querySelectorAll("button");
+
+  // add eventListner to each button
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      // select div element which task happened
+      const taskDiv = e.target.parentElement;
+      const taskSpan = taskDiv.querySelector("span");
+
+      // Condition for up buttons
+      if (button.classList.contains("upButton")) {
+        const prevTaskDiv = taskDiv.previousElementSibling;
+        if (prevTaskDiv) {
+          const prevTaskSpan = prevTaskDiv.querySelector("span");
+
+          // swap task span textContent
+          [taskSpan.textContent, prevTaskSpan.textContent] = [
+            prevTaskSpan.textContent,
+            taskSpan.textContent,
+          ];
+        }
+        // condition for down buttons
+      } else if (button.classList.contains("downButton")) {
+        const nextTaskDiv = taskDiv.nextElementSibling;
+        if (nextTaskDiv) {
+          const nextTaskSpan = nextTaskDiv.querySelector("span");
+
+          // swap task span textContent
           [taskSpan.textContent, nextTaskSpan.textContent] = [
             nextTaskSpan.textContent,
             taskSpan.textContent,
